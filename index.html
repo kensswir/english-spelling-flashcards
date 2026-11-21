@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>English Spelling Flash Cards — List 11</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  body {
+    font-family: -apple-system, "Segoe UI", sans-serif;
+    background: #E7F5FF;
+    min-height: 100vh;
+    display: flex; flex-direction: column; align-items: center;
+    padding: 20px 16px 40px;
+    color: #333;
+  }
+  h1 { font-size: 26px; margin-bottom: 4px; text-align: center; }
+  .sub { font-size: 15px; color: #888; margin-bottom: 6px; text-align: center; }
+  .sub b { color: #1971C2; }
+  .progress-wrap { width: 100%; max-width: 420px; margin: 14px 0 4px; }
+  .progress-text { font-size: 14px; color: #666; text-align: center; margin-bottom: 6px; }
+  .progress-bar { height: 10px; background: #D0EBFF; border-radius: 99px; overflow: hidden; }
+  .progress-fill { height: 100%; background: #339AF0; width: 0%; transition: width .3s; }
+  .counter { font-size: 13px; color: #999; text-align: center; margin-top: 6px; }
+
+  .card-scene { width: 100%; max-width: 420px; height: 300px; perspective: 1000px; margin: 18px 0 8px; cursor: pointer; }
+  .card { width: 100%; height: 100%; position: relative; transform-style: preserve-3d; transition: transform .45s; }
+  .card.flipped { transform: rotateY(180deg); }
+  .face {
+    position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden;
+    border-radius: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 24px; box-shadow: 0 6px 24px rgba(0,0,0,.12); text-align: center;
+  }
+  .face.front { background: #fff; border: 3px solid #339AF0; }
+  .face.back { background: #1971C2; color: #fff; transform: rotateY(180deg); }
+  .base { font-size: 30px; font-weight: 700; color: #1971C2; }
+  .base .suffix { color: #F08C00; }
+  .meaning { font-size: 20px; color: #555; margin-top: 14px; }
+  .hint { font-size: 13px; color: #BBB; margin-top: 26px; }
+  .word { font-size: 54px; font-weight: 700; line-height: 1.15; letter-spacing: 1px; }
+  .word .dbl { color: #FFD43B; }
+  .word-sub { font-size: 18px; margin-top: 12px; opacity: .9; }
+  .tap-hint { font-size: 13px; color: #AAA; text-align: center; margin-bottom: 14px; }
+
+  .mark-row { display: flex; gap: 12px; width: 100%; max-width: 420px; }
+  .mark-row button {
+    flex: 1; padding: 14px 0; font-size: 17px; font-weight: 700; border: none; border-radius: 14px; cursor: pointer;
+  }
+  .btn-still { background: #FFE3E3; color: #C92A2A; }
+  .btn-know { background: #D3F9D8; color: #2B8A3E; }
+  .nav-row { display: flex; gap: 12px; width: 100%; max-width: 420px; margin-top: 12px; }
+  .nav-row button {
+    flex: 1; padding: 13px 0; font-size: 16px; font-weight: 600; border-radius: 14px; cursor: pointer;
+    background: #fff; border: 2px solid #A5D8FF; color: #1971C2;
+  }
+  .tools { display: flex; gap: 12px; width: 100%; max-width: 420px; margin-top: 12px; }
+  .tools button {
+    flex: 1; padding: 11px 0; font-size: 15px; border-radius: 14px; cursor: pointer;
+    background: #F1F8FF; border: 1.5px solid #A5D8FF; color: #555; font-weight: 600;
+  }
+  .tools button.active { background: #1971C2; color: #fff; border-color: #1971C2; }
+  .done {
+    display: none; text-align: center; margin-top: 18px; background: #D3F9D8; color: #2B8A3E;
+    padding: 16px; border-radius: 16px; width: 100%; max-width: 420px; font-size: 18px; font-weight: 700;
+  }
+  .word-list { width: 100%; max-width: 420px; margin-top: 26px; }
+  .word-list h2 { font-size: 17px; margin-bottom: 8px; }
+  .word-list table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 12px; overflow: hidden; font-size: 15px; }
+  .word-list td, .word-list th { padding: 9px 10px; border-bottom: 1px solid #F1F3F5; text-align: left; }
+  .word-list tr:last-child td { border-bottom: none; }
+  .word-list td.w { font-size: 18px; font-weight: 600; }
+  .word-list td.done-mark { color: #2B8A3E; font-weight: 700; }
+  .rule { width: 100%; max-width: 420px; margin-top: 22px; background: #FFF9DB; border-radius: 14px; padding: 14px 16px; font-size: 15px; line-height: 1.5; }
+  .rule b { color: #E8590C; }
+</style>
+</head>
+<body>
+  <h1>English Spelling Flash Cards</h1>
+  <div class="sub">Year 3 · List 11 — when <b>-ing</b>, <b>-en</b> and <b>-ed</b> are added to multisyllabic words<br>Spelling test: <b>Friday 27 November 2026</b></div>
+
+  <div class="progress-wrap">
+    <div class="progress-text" id="progressText">Got it 0 / 10</div>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="counter" id="counter">Card 1 / 10</div>
+  </div>
+
+  <div class="card-scene" id="scene">
+    <div class="card" id="card">
+      <div class="face front">
+        <div class="base" id="frontBase"></div>
+        <div class="meaning" id="frontMeaning"></div>
+        <div class="hint" id="frontHint">Tap the card to see the spelling</div>
+      </div>
+      <div class="face back">
+        <div class="word" id="backWord"></div>
+        <div class="word-sub" id="backSub"></div>
+      </div>
+    </div>
+  </div>
+  <div class="tap-hint">👆 Tap to flip · then tap "Know it" or "Still learning"</div>
+
+  <div class="mark-row">
+    <button class="btn-still" id="btnStill">😕 Still learning</button>
+    <button class="btn-know" id="btnKnow">😊 Know it</button>
+  </div>
+  <div class="nav-row">
+    <button id="btnPrev">← Previous</button>
+    <button id="btnNext">Next →</button>
+  </div>
+  <div class="tools">
+    <button id="btnShuffle">🔀 Shuffle</button>
+    <button id="btnTest">✏️ Test mode</button>
+    <button id="btnReset">↺ Start again</button>
+  </div>
+
+  <div class="done" id="doneBox">🎉 All 10 words learned! Good luck on Friday!</div>
+
+  <div class="rule">💡 <b>Rule:</b> short vowel + one consonant at the end → <b>double the last letter</b> before adding -ing, -en or -ed. <i>forget → forgetting, prefer → preferred.</i></div>
+
+  <div class="word-list">
+    <h2>All words — List 11</h2>
+    <table>
+      <tr><th>Word</th><th>Base + ending</th><th>Meaning</th><th></th></tr>
+      <tbody id="wordTable"></tbody>
+    </table>
+  </div>
+
+<script>
+const WORDS = [
+  { word: "forgetting", base: "forget", end: "ing", meaning: "not remembering", dbl: "tt" },
+  { word: "forgotten", base: "forget", end: "en", meaning: "not remembered", dbl: "tt" },
+  { word: "beginning", base: "begin", end: "ing", meaning: "starting", dbl: "nn" },
+  { word: "preferred", base: "prefer", end: "ed", meaning: "liked more", dbl: "rr" },
+  { word: "permitted", base: "permit", end: "ed", meaning: "allowed", dbl: "tt" },
+  { word: "regretting", base: "regret", end: "ing", meaning: "feeling sorry", dbl: "tt" },
+  { word: "committed", base: "commit", end: "ed", meaning: "did it / dedicated", dbl: "tt" },
+  { word: "forbidden", base: "forbid", end: "en", meaning: "not allowed", dbl: "dd" },
+  { word: "propelled", base: "propel", end: "ed", meaning: "pushed forward", dbl: "ll" },
+  { word: "equipped", base: "equip", end: "ed", meaning: "provided with what is needed", dbl: "pp" },
+];
+let order = WORDS.map((_, i) => i);
+let idx = 0;
+let known = new Set();
+let testMode = false;
+
+const card = document.getElementById('card');
+const scene = document.getElementById('scene');
+
+function highlight(word, dbl) {
+  const i = word.indexOf(dbl);
+  if (i < 0) return word;
+  return word.slice(0, i) + '<span class="dbl">' + dbl + '</span>' + word.slice(i + dbl.length);
+}
+function render() {
+  const w = WORDS[order[idx]];
+  card.classList.remove('flipped');
+  document.getElementById('frontBase').innerHTML = testMode ? '' : (w.base + ' + <span class="suffix">-' + w.end + '</span>');
+  document.getElementById('frontMeaning').textContent = w.meaning;
+  document.getElementById('frontHint').textContent = testMode ? 'Test mode: spell this word, then tap to check' : 'Tap the card to see the spelling';
+  document.getElementById('backWord').innerHTML = highlight(w.word, w.dbl);
+  document.getElementById('backSub').textContent = w.base + ' + -' + w.end + ' · ' + w.meaning;
+  document.getElementById('counter').textContent = 'Card ' + (idx + 1) + ' / ' + WORDS.length;
+  document.getElementById('progressText').textContent = 'Got it ' + known.size + ' / ' + WORDS.length;
+  document.getElementById('progressFill').style.width = (known.size / WORDS.length * 100) + '%';
+  document.getElementById('doneBox').style.display = known.size === WORDS.length ? 'block' : 'none';
+  document.getElementById('wordTable').innerHTML = WORDS.map((x, i) =>
+    '<tr><td class="w">' + x.word + '</td><td>' + x.base + ' + -' + x.end + '</td><td>' + x.meaning + '</td><td class="done-mark">' + (known.has(i) ? '✓' : '') + '</td></tr>'
+  ).join('');
+}
+function mark(knowIt) {
+  const i = order[idx];
+  if (knowIt) known.add(i); else known.delete(i);
+  if (idx < WORDS.length - 1) idx++;
+  render();
+}
+scene.addEventListener('click', () => card.classList.toggle('flipped'));
+document.getElementById('btnKnow').addEventListener('click', () => mark(true));
+document.getElementById('btnStill').addEventListener('click', () => mark(false));
+document.getElementById('btnNext').addEventListener('click', () => { idx = (idx + 1) % WORDS.length; render(); });
+document.getElementById('btnPrev').addEventListener('click', () => { idx = (idx - 1 + WORDS.length) % WORDS.length; render(); });
+document.getElementById('btnShuffle').addEventListener('click', () => {
+  for (let i = order.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [order[i], order[j]] = [order[j], order[i]]; }
+  idx = 0; render();
+});
+document.getElementById('btnTest').addEventListener('click', (e) => {
+  testMode = !testMode;
+  e.target.classList.toggle('active', testMode);
+  e.target.textContent = testMode ? '✏️ Test mode: on' : '✏️ Test mode';
+  render();
+});
+document.getElementById('btnReset').addEventListener('click', () => { known.clear(); idx = 0; render(); });
+render();
+</script>
+</body>
+</html>
